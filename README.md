@@ -1,5 +1,5 @@
 # tecweb
-Matricula:	202154581
+Matricula:	202154581.
 Nombre:		Alan Rebolledo Gradas
 Materia:	Aplicaciones web
 Periodo:	Otoño 2024
