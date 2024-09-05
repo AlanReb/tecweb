@@ -162,7 +162,21 @@
     <br>
 
 
- 
+    <h3>7. Usando la variable predefinida $_SERVER, determina lo siguiente:
+    <br>a. La versión de Apache y PHP,
+    <br>b. El nombre del sistema operativo (servidor),
+    <br>c. El idioma del navegador (cliente).
+    </h3>
+    <!-- Párrafo descriptivo -->
+    <p> Se muestran del modo siguiente:  </p>
+        <!-- Lista -->
+        <ul>
+            <li> Versión de Apache: Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.2.12 Versión de PHP: 8.2.12 </li>
+            <li> Sistema operativo del servidor: WINNT  </li>
+            <li> $b = 5a version de PHP </li>
+            <li> Idioma del navegador: es-MX,es;q=0.8,en-US;q=0.5,en;q=0.3 </li>
+        </ul>
+
 
 
 </body> 
