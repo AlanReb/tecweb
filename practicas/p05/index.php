@@ -98,9 +98,24 @@
             <li> Array ( [0] => MySQL )            </li>
         </ul>
 
+ 
+        <h3>4. Lee y muestra los valores de las variables del ejercicio anterior, pero ahora con la ayuda de
+    la matriz $GLOBALS o del modificador global de PHP.</h3>
 
-    
-   
+    <!-- Párrafo descriptivo -->
+    <p> Se muestran del modo siguiente:  </p>
+            <!-- Lista -->
+        <ul>
+            <li> $GLOBALS['a'] = MySQL </li>
+            <li> $GLOBALS['b'] = MySQL </li>
+            <li> $GLOBALS['c'] = MySQL </li>
+            <li> Array ( [0] => MySQL ) </li>
+        </ul>
+    <br>
+    <br>
+
+
+
 
 
 
