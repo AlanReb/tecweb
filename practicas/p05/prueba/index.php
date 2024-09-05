@@ -106,19 +106,26 @@ $d = ($a OR $b);
 $e = ($a AND $c);
 $f = ($a XOR $b);
 
+echo '<br>';
 var_dump($a);
+echo '<br>';
 var_dump($b);
+echo '<br>';
 var_dump($c);
+echo '<br>';
 var_dump($d);
+echo '<br>';
 var_dump($e);
+echo '<br>';
 var_dump($f);
 
 echo '<br>';
 
 // Transformar los valores booleanos de $c y $e para mostrarlos con echo
 echo "\nTransformando valores booleanos para mostrar con echo\n";
-
+echo '<br>';
 echo "Valor de \$c: " . ($c ? 'true' : 'false') . "\n";
+echo '<br>';
 echo "Valor de \$e: " . ($e ? 'true' : 'false') . "\n";
 
 echo "\n\n";
@@ -128,14 +135,17 @@ echo '<br>';
 
 // 7. Usando la variable $_SERVER
 echo "Ejercicio 7: Información del servidor\n";
+echo '<br>';
 
 // a. La versión de Apache y PHP
 echo "Versión de Apache: " . $_SERVER['SERVER_SOFTWARE'] . "\n";
 echo "Versión de PHP: " . phpversion() . "\n";
+echo '<br>';
 
 // b. El nombre del sistema operativo (servidor)
 echo "Sistema operativo del servidor: " . PHP_OS . "\n";
 
+echo '<br>';
 // c. El idioma del navegador (cliente)
 echo "Idioma del navegador: " . $_SERVER['HTTP_ACCEPT_LANGUAGE'] . "\n";
 
