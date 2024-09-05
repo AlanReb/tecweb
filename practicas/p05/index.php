@@ -135,7 +135,35 @@
     <br>
 
 
-    
+    <h3>6. Dar y comprobar el valor booleano de las variables $a, $b, $c, $d, $e y $f y muéstralas
+    usando la función var_dump(<datos>).
+    Después investiga una función de PHP que permita transformar el valor booleano de $c y $e
+    en uno que se pueda mostrar con un echo:
+    <br>$a = “0”;
+    <br>$b = “TRUE”;
+    <br>$c = FALSE;
+    <br>$d = ($a OR $b);
+    <br>$e = ($a AND $c);
+    <br>$f = ($a XOR $b);
+    </h3>
+    <!-- Párrafo descriptivo -->
+    <p> En este hay una situación, al abrir el php del navegador, todas las variables muestran bool(false), sin embargo, en php tester se muestran los resultados siguientes:  </p>
+        <!-- Lista -->
+        <ul>
+            <li> string(1) "0" </li>
+            <li> string(4) "TRUE" </li>
+            <li> bool(false) </li>
+            <li> bool(true)</li>
+            <li> bool(false)</li>
+            <li> bool(true)</li>
+        </ul>
+    <p> Para mostrar el booleano se encotraron dos manera, una es con una funcion que sería: echo ($variable ? 'true' : 'false'), esta mostrará true o false. Otra manera es sencillamente casteando a int: echo (int)$variable y este mostrará 0 o 1  </p>
+    <br>
+    <br>
+
+
+ 
+
 
 </body> 
 </html>
