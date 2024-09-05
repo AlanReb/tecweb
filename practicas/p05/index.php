@@ -115,15 +115,27 @@
     <br>
 
 
+    <h3>5. Dar el valor de las variables $a, $b, $c al final del siguiente script:
+    <br>$a = “7 personas”;
+    <br>$b = (integer) $a;
+    <br>$a = “9E3”;
+    <br>$c = (double) $a;
+    </h3>
+    <!-- Párrafo descriptivo -->
+    <p> Se muestra correctamente y del modo siguiente:  </p>
+        <!-- Lista -->
+        <ul>
+            <li> $a = 7 personas </li>
+            <li> $b = 7 </li>
+            <li> $b = 5a version de PHP </li>
+            <li> $a = 9E3 </li>
+            <li> $c = 9000 </li>
+        </ul>
+    <br>
+    <br>
 
 
-
-
-
-
-
-
-
+    
 
 </body> 
 </html>
