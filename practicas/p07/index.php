@@ -28,14 +28,14 @@ secuencia compuesta por: impar, par, impar</p>
     pero que además sea múltiplo de un número dado. </p>
     <?php
         include_once('src/funciones.php');
-        
+        numdado($_GET['numero2']);
 
     ?>
 
     <p> Crear una variante de este script utilizando el ciclo do-while, el número dado se debe obtener vía GET. </p>
     <?php
         include_once('src/funciones.php');
-        
+        numdadodo($_GET['numero2']);
 
     ?>
 

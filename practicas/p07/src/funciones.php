@@ -71,6 +71,61 @@ function ParImpar() {
 ?>
 
 <?php
+function numdado($numero2){
+    // Obtener el número dado vía GET
+    $numero = $numero2;
+    if (isset($_GET['numero2'])) {
+        $numero = intval($_GET['numero2']); // Convertir a entero el valor obtenido por GET
+
+        if ($numero > 0) {
+            // Iniciar el ciclo while
+            $encontrado = false;
+            $intento = 0; // Contador de intentos
+
+            while (!$encontrado) {
+                $aleatorio = rand(1, 1000); // Generar número aleatorio entre 1 y 1000
+                $intento++;
+
+                if ($aleatorio % $numero == 0) {
+                    $encontrado = true;
+                    echo "Número aleatorio múltiplo de $numero encontrado: $aleatorio (Intentos: $intento)";
+                }
+            }
+        } else {
+            echo "Por favor, proporciona un número mayor a 0.";
+        }
+    }
+}
+?>
+
+<?php
+function numdadodo($numero2){
+    $numero = $numero2;
+    // Obtener el número dado vía GET
+    if (isset($_GET['numero2'])) {
+        $numero = intval($_GET['numero2']); // Convertir a entero el valor obtenido por GET
+
+        if ($numero > 0) {
+            // Iniciar el ciclo do-while
+            $intento = 0; // Contador de intentos
+
+            do {
+                $aleatorio = rand(1, 1000); // Generar número aleatorio entre 1 y 1000
+                $intento++;
+            } while ($aleatorio % $numero != 0); // Repetir mientras no sea múltiplo
+
+            echo "Número aleatorio múltiplo de $numero encontrado: $aleatorio (Intentos: $intento)";
+        } else {
+            echo "Por favor, proporciona un número mayor a 0.";
+        }
+    } else {
+        echo "Por favor, proporciona un número usando el parámetro 'numero' en la URL.";
+    }
+}
+?>
+
+
+<?php
 function arrfor(){
     // Crear el arreglo con un ciclo for
     $arreglo = [];
@@ -78,14 +133,10 @@ function arrfor(){
         $arreglo[$i] = chr($i); // chr() convierte el código ASCII en su correspondiente caracter
     }
 
-    // Generar una tabla en XHTML usando foreach
-    //echo "<table border='1' cellpadding='10' cellspacing='0'>";
-    //echo "<tr><th>Código ASCII</th><th>Letra</th></tr>";
-
-
     foreach($arreglo as $key => $value){
         echo $key.' => '.$value.'<br>';
     }
-    //echo "</table>";
+
 }
 ?>
+
