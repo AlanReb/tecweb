@@ -11,7 +11,6 @@
             "Auto" => array("marca" => "MAZDA", "modelo" => 2019, "tipo" => "sedan"),
             "Propietario" => array("nombre" => "Ma. del Consuelo Molina", "ciudad" => "Puebla", "direccion" => "97 oriente")
         ),
-        
         "UBN6340" => array( 
             "Auto" => array("marca" => "MINI COOPER", "modelo" => 2010, "tipo" => "sedan"),
             "Propietario" => array("nombre" => "Armando Durain", "ciudad" => "Monterrey", "direccion" => "13 norte")
@@ -24,45 +23,45 @@
             "Auto" => array("marca" => "HONDA", "modelo" => 2024, "tipo" => "oddesey"),
             "Propietario" => array("nombre" => "Wade Wilson", "ciudad" => "Regina", "direccion" => "21 avenue")
         ),
-        "UBN6343" => array( 
-            "Auto" => array("marca" => "MAZDA", "modelo" => 2019, "tipo" => "sedan"),
-            "Propietario" => array("nombre" => "Ma. del Consuelo Molina", "ciudad" => "Puebla", "direccion" => "97 oriente")
+        "BTF1985" => array( 
+            "Auto" => array("marca" => "DELOREAN", "modelo" => 1985, "tipo" => "sport"),
+            "Propietario" => array("nombre" => "Emmet Brown", "ciudad" => "Hill Valley", "direccion" => "1640 Riverside Drive")
         ),
-        "UBN6344" => array( 
-            "Auto" => array("marca" => "MAZDA", "modelo" => 2019, "tipo" => "sedan"),
-            "Propietario" => array("nombre" => "Ma. del Consuelo Molina", "ciudad" => "Puebla", "direccion" => "97 oriente")
+        "TFB2007" => array( 
+            "Auto" => array("marca" => "CAMARO", "modelo" => 2007, "tipo" => "sport"),
+            "Propietario" => array("nombre" => "Sam Witwicky", "ciudad" => "Detroit", "direccion" => "2187 West 24th Street")
         ),
-        "UBN6345" => array( 
-            "Auto" => array("marca" => "MAZDA", "modelo" => 2019, "tipo" => "sedan"),
-            "Propietario" => array("nombre" => "Ma. del Consuelo Molina", "ciudad" => "Puebla", "direccion" => "97 oriente")
+        "FAF2001" => array( 
+            "Auto" => array("marca" => "DOGDE", "modelo" => 1970, "tipo" => "charger"),
+            "Propietario" => array("nombre" => "Dominic Toretto", "ciudad" => "Los Angeles", "direccion" => "722 East Kensington Road")
         ),
-        "UBN6346" => array( 
-            "Auto" => array("marca" => "MAZDA", "modelo" => 2019, "tipo" => "sedan"),
-            "Propietario" => array("nombre" => "Ma. del Consuelo Molina", "ciudad" => "Puebla", "direccion" => "97 oriente")
+        "KNR1982" => array( 
+            "Auto" => array("marca" => "PONTIAC", "modelo" => 1982, "tipo" => "firebird"),
+            "Propietario" => array("nombre" => "Michael Knight", "ciudad" => "Los Angeles", "direccion" => "Greystone Mansion")
         ),
-        "UBN6347" => array( 
-            "Auto" => array("marca" => "MAZDA", "modelo" => 2019, "tipo" => "sedan"),
-            "Propietario" => array("nombre" => "Ma. del Consuelo Molina", "ciudad" => "Puebla", "direccion" => "97 oriente")
+        "DHH2006" => array( 
+            "Auto" => array("marca" => "HUDSON", "modelo" => 1951, "tipo" => "race"),
+            "Propietario" => array("nombre" => "Hudson Hornett", "ciudad" => "Radiador Springs", "direccion" => "Ruta 66")
         ),
         "AAA1111" => array( 
             "Auto" => array("marca" => "SUZUKI", "modelo" => 2015, "tipo" => "sedan"),
             "Propietario" => array("nombre" => "Mariano Perez", "ciudad" => "CDMX", "direccion" => "97 poniente")
         ),
         "UBN6349" => array( 
-            "Auto" => array("marca" => "MAZDA", "modelo" => 2019, "tipo" => "sedan"),
-            "Propietario" => array("nombre" => "Ma. del Consuelo Molina", "ciudad" => "Puebla", "direccion" => "97 oriente")
+            "Auto" => array("marca" => "TESLA", "modelo" => 2020, "tipo" => "sedan"),
+            "Propietario" => array("nombre" => "Juan Carlos", "ciudad" => "Puebla", "direccion" => "2 norte")
         ),
-        "UBN6350" => array( 
-            "Auto" => array("marca" => "MAZDA", "modelo" => 2019, "tipo" => "sedan"),
-            "Propietario" => array("nombre" => "Ma. del Consuelo Molina", "ciudad" => "Puebla", "direccion" => "97 oriente")
+        "TFS2011" => array( 
+            "Auto" => array("marca" => "MERCEDES_BENZ", "modelo" => 2011, "tipo" => "sls"),
+            "Propietario" => array("nombre" => "Dylan Goul", "ciudad" => "Chicago", "direccion" => "Main avenue")
         ),
-        "UBN6351" => array( 
-            "Auto" => array("marca" => "MAZDA", "modelo" => 2019, "tipo" => "sedan"),
-            "Propietario" => array("nombre" => "Ma. del Consuelo Molina", "ciudad" => "Puebla", "direccion" => "97 oriente")
+        "TFS2009" => array( 
+            "Auto" => array("marca" => "CHEVROLET", "modelo" => 2009, "tipo" => "spark"),
+            "Propietario" => array("nombre" => "Seymour Simmons", "ciudad" => "Egipto", "direccion" => "El cairo")
         ),
         "XYZ3333" => array( 
-            "Auto" => array("marca" => "MAZDA", "modelo" => 2019, "tipo" => "sedan"),
-            "Propietario" => array("nombre" => "Ma. del Consuelo Molina", "ciudad" => "Puebla", "direccion" => "97 oriente")
+            "Auto" => array("marca" => "FERRARI", "modelo" => 2009, "tipo" => "sport"),
+            "Propietario" => array("nombre" => "Jose Martin Orato", "ciudad" => "Puebla", "direccion" => "14 sur")
         ),
         "XYZ1234" => array(
             "Auto" => array("marca" => "TOYOTA", "modelo" => 2018, "tipo" => "sedan"),
