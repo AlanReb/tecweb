@@ -1,3 +1,4 @@
+
 <?php
     header("Content-Type: application/json; charset=utf-8"); 
     $data = array();
@@ -23,7 +24,6 @@
 			die('Falló la conexión: '.$link->connect_error.'<br/>');
 			//exit();
 		}
-
 		/** Crear una tabla que no devuelve un conjunto de resultados */
 		if ( $result = $link->query("SELECT * FROM productos WHERE unidades <= $tope") ) 
 		{
