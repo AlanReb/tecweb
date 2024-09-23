@@ -1,11 +1,11 @@
 <?php
     $nombre = $_POST['name'];
-    $marca  = 'marca_producto';
-    $modelo = 'modelo_producto';
-    $precio = 1.0;
-    $detalles = 'detalles_producto';
-    $unidades = 1;
-    $imagen   = 'img/imagen.png';
+    $marca  = $_POST['marca'];
+    $modelo = $_POST['modelo'];
+    $precio = $_POST['precio'];
+    $detalles = $_POST['detalles'];
+    $unidades = $_POST['unidades'];
+    $imagen   = $_POST['imagen'];
 
     /** SE CREA EL OBJETO DE CONEXION */
     @$link = new mysqli('localhost', 'root', 'nomeacuerdo', 'marketzone');	
@@ -21,14 +21,14 @@
     $sql = "INSERT INTO productos VALUES (null, '{$nombre}', '{$marca}', '{$modelo}', {$precio}, '{$detalles}', {$unidades}, '{$imagen}')";
     if ( $link->query($sql) ) 
     {
-        if($nombre && $marca && $modelo)
-        {
+        //if($nombre && $marca && $modelo)
+        //{
             echo 'Producto insertado con ID: '.$link->insert_id;
-        }
-        else    
-        {
-            echo 'El Producto no pudo ser insertado =(';
-        }
+        //}
+        //else    
+        //{
+        //    echo 'El Producto no pudo ser insertado =(';
+        //}
     }
     else
     {
