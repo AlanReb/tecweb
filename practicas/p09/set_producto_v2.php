@@ -6,6 +6,7 @@
     $detalles = $_POST['detalles'];
     $unidades = $_POST['unidades'];
     $imagen   = $_POST['imagen'];
+    $eliminado =0;
 
     /** SE CREA EL OBJETO DE CONEXION */
     @$link = new mysqli('localhost', 'root', 'nomeacuerdo', 'marketzone');	
@@ -18,7 +19,7 @@
     }
 
     /** Crear una tabla que no devuelve un conjunto de resultados */
-    $sql = "INSERT INTO productos VALUES (null, '{$nombre}', '{$marca}', '{$modelo}', {$precio}, '{$detalles}', {$unidades}, '{$imagen}')";
+    $sql = "INSERT INTO productos VALUES (null, '{$nombre}', '{$marca}', '{$modelo}', {$precio}, '{$detalles}', {$unidades}, '{$imagen}','{$eliminado}')";
     if ( $link->query($sql) ) 
     {
         //if($nombre && $marca && $modelo)
