@@ -19,7 +19,10 @@
     }
 
     /** Crear una tabla que no devuelve un conjunto de resultados */
-    $sql = "INSERT INTO productos VALUES (null, '{$nombre}', '{$marca}', '{$modelo}', {$precio}, '{$detalles}', {$unidades}, '{$imagen}','{$eliminado}')";
+    $sql = "INSERT INTO productos (nombre, marca, modelo, precio, detalles, unidades,imagen) VALUES ('{$nombre}', '{$marca}', '{$modelo}', '{$precio}', '{$detalles}', '{$unidades}', '{$imagen}');";
+    
+    
+    
     if ( $link->query($sql) ) 
     {
         //if($nombre && $marca && $modelo)
