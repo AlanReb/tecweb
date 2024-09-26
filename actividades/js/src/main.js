@@ -176,29 +176,116 @@ function Acumulador(){
     document.write('La suma de los valores es '+suma+'<br>');
 }
 
-function ej12(){
-
-}
-function ej13(){
-
-}
-
-function ej14(){
-
-}
-
-function ej15(){
-
-}
-
-function ej16(){
-
-}
-
-function ej17(){
-
+function DistintoDe0(){
+    var valor;
+    do{
+    valor = prompt('Ingresa un valor entre 0 y 999:', '');
+    valor = parseInt(valor);
+    document.write('El valor '+valor+' tiene ');
+    if (valor<10)
+    document.write('Tiene 1 dígitos');
+    else
+    if (valor<100) {
+    document.write('Tiene 2 dígitos');
+    }
+    else {
+    document.write('Tiene 3 dígitos');
+    }
+    document.write('<br>');
+    }while(valor!=0);
 }
 
-function ej18(){
+function UnoADiez(){
+    var f;
+    for(f=1; f<=10; f++)
+    {
+    document.write(f+' ');
+    }
+}
 
+function CuidN(){
+    document.write('Cuidado<br>');
+    document.write('Ingresa tu documento correctamente<br>');
+    document.write('Cuidado<br>');
+    document.write('Ingresa tu documento correctamente<br>');
+    document.write('Cuidado<br>');
+    document.write('Ingresa tu documento correctamente<br>');
+}
+
+function mostrarMensaje() {
+    document.write('Cuidado<br>');
+    document.write('Ingresa tu documento correctamente<br>');
+}
+
+function CuidF(){
+    mostrarMensaje();
+    mostrarMensaje();
+    mostrarMensaje();
+}
+
+function mostrarRango(x1,x2) {
+    var inicio;
+    for(inicio=x1; inicio<=x2; inicio++) {
+    document.write(inicio+' ');
+    
+    }
+}
+
+function Rango(){
+    var valor1,valor2;
+    valor1 = prompt('Ingresa el valor inferior:', '');
+    valor1 = parseInt(valor1);
+    valor2 = prompt('Ingresa el valor superior:', '');
+    valor2 = parseInt(valor2);
+    mostrarRango(valor1,valor2);
+}
+
+function convertirCastellanoIF(x) {
+
+    if(x==1)
+    return 'uno';
+    else
+    if(x==2)
+    
+    return 'dos';
+    else
+    if(x==3)
+    return 'tres';
+    else
+    if(x==4)
+    
+    return 'cuatro';
+    
+    else
+    
+    if(x==5)
+    return 'cinco';
+    else
+    return 'valor incorrecto';
+    
+}
+
+function convertirCastellano(x) {
+    switch (x) {
+    case 1: return "uno";
+    case 2: return "dos";
+    case 3: return "tres";
+    case 4: return "cuatro";
+    case 5: return "cinco";
+    default: return "valor incorrecto";
+    }
+}
+
+function NumTextoIF(){
+    var valor = prompt('Ingresa un valor entre 1 y 5', '');
+    valor = parseInt(valor);
+    var r = convertirCastellanoIF(valor);
+    document.write(r);
+}
+
+function NumTextoC(){
+    var valor = prompt('Ingresa un valor entre 1 y 5', '');
+    valor = parseInt(valor);
+    var r = convertirCastellano(valor);
+    document.write(r);
 }
