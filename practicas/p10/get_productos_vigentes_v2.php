@@ -51,7 +51,7 @@
                 En este caso se obtienen todos los datos de la fila con el id encontrado
                 y que pertenecen a la clase "row-data".
                 */
-			   
+                var id = document.getElementById(rowId).querySelector("th").innerHTML;  // Obtenemos el ID del producto
                 // Obtener los valores de las columnas de la fila
                 var name = data[0].innerHTML;
                 var brand = data[1].innerHTML;
@@ -59,13 +59,16 @@
                 var price = data[3].innerHTML;
                 var units = data[4].innerHTML;
                 var details = data[5].innerHTML;
-				var image = data[6].querySelector("img").src; // Obtener la URL de la imagen
+
+				// Verificar si existe una imagen en la fila
+                var image = document.getElementById(rowId).querySelector("img");
+                var imageUrl = image ? image.src : ""; // Si hay imagen, se obtiene su URL, sino cadena vacía
 
                 // Mostrar una alerta con el nombre del producto
-                alert("Nombre: " + name);
-
+                alert("Nombre: " + name + "ID: " + id);
+                
                 // Llamar a la función para enviar los datos al formulario
-                send2form(name, brand, model, price, units, details, image);
+                send2form(id,name, brand, model, price, units, details, imageUrl);
             }
 
         </script>
@@ -103,15 +106,23 @@
                             <td class="row-data"><?= htmlspecialchars($row['unidades']) ?></td>
                             <td class="row-data"><?= utf8_encode($row['detalles']) ?></td>
                             <td><img src="<?= htmlspecialchars($row['imagen']) ?>" alt="Imagen del producto" /></td>
-                            <td><input type="button" value="submit" onclick="show()" /></td>
+                            <td><input type="button" 
+                            value="submit" 
+                            onclick="show()" /></td>
                         </tr>
                     <?php endforeach; ?>
 				</tbody>
 			</table>
 			<script>
 
-			function send2form(name, brand, model, price, units, details, image) {
+			function send2form(id, name, brand, model, price, units, details, imageUrl) {
                 var form = document.createElement("form");
+                // Crear campo oculto para enviar el ID del producto
+                var idIn = document.createElement("input");
+                idIn.type = 'hidden';
+                idIn.name = 'id';
+                idIn.value = id;
+                form.appendChild(idIn);
 
                 // Crear campos ocultos para enviar los datos al formulario
                 var nombreIn = document.createElement("input");
@@ -153,12 +164,12 @@
 				var imagenIn = document.createElement("input");
 				imagenIn.type = 'hidden';
 				imagenIn.name = 'imagen';
-				imagenIn.value = image; // Aquí se pasa la URL de la imagen
+				imagenIn.value = imageUrl; // Aquí se pasa la URL de la imagen
 				form.appendChild(imagenIn);
 
                 // Configurar el método y la acción del formulario
                 form.method = 'POST';
-                form.action = "http://localhost/tecweb/practicas/p10/formulario_productos_v2.php";  
+                form.action = "http://localhost/tecweb/practicas/p10/formulario_productos_v3.php";  
 
                 // Agregar el formulario al cuerpo del documento y enviarlo
                 document.body.appendChild(form);
