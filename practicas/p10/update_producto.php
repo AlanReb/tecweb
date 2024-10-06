@@ -1,11 +1,18 @@
 <?php
     // Obtener los valores del formulario
-    $nombre = $_POST['name'];
+        // Obtener los valores del formulario
+    if (isset($_POST['idp'])) {
+        $id = $_POST['idp'];
+    } else {
+        die('Error: No se recibió el ID del producto.');
+    }
+    $nombre = $_POST['nombre'];
     $marca  = $_POST['marca'];
     $modelo = $_POST['modelo'];
     $precio = $_POST['precio'];
     $detalles = $_POST['detalles'];
     $unidades = $_POST['unidades'];
+    $pathImagen = $_POST['imagen'];
     $eliminado = 0;
 
     // Conectar a la base de datos
@@ -39,15 +46,24 @@
         $rutaImagen = $defaultImagePath;
     }
 
-    // Crear la consulta para insertar el producto
-    $sql = "INSERT INTO productos (nombre, marca, modelo, precio, detalles, unidades, imagen, eliminado)
-            VALUES ('{$nombre}', '{$marca}', '{$modelo}', '{$precio}', '{$detalles}', '{$unidades}', '{$rutaImagen}', '{$eliminado}')";
+    // Preparar la sentencia SQL para actualizar el registro
+    $sql = "UPDATE productos SET 
+    nombre = '$nombre', 
+    marca = '$marca', 
+    modelo = '$modelo', 
+    precio = $precio, 
+    detalles = '$detalles', 
+    unidades = $unidades, 
+    imagen = '$pathImagen',
+    eliminado = '$eliminado'
+    WHERE id = $id;";
 
     if ($link->query($sql)) {
-        echo 'Producto insertado con ID: ' . $link->insert_id;
+        echo 'Producto actualizado';
     } else {
         echo 'Error al insertar el producto: ' . $link->error;
     }
 
-    $link->close();
+    // Cierra la conexión
+    mysqli_close($link);
 ?>

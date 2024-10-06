@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Registro de productos</title>
+    <style type="text/css">
+      ol, ul {
+        list-style-type: none;
+      }
+    </style>
+    <script>
+      function validarFormulario(event) {
+        // Previene el envío del formulario si hay errores
+        event.preventDefault();
+
+        // Obtener los valores de los campos
+        var nombre = document.getElementById('form-name').value.trim();
+        var marca = document.getElementById('form-brand').value.trim();
+        var modelo = document.getElementById('form-model').value.trim();
+        var precio = document.getElementById('form-price').value.trim();
+        var unidades = document.getElementById('form-units').value.trim();
+        var detalles = document.getElementById('form-details').value.trim();
+        var imagen = document.getElementById('imagen').value.trim();
+
+        // Validaciones
+        var errores = [];
+
+        // a. El nombre debe ser requerido y tener 100 caracteres o menos
+        if (nombre === "" || nombre.length > 100) {
+          errores.push("El nombre es requerido y debe tener 100 caracteres o menos.");
+        }
+
+        // b. La marca debe ser requerida (por ahora como input) y seleccionarse de una lista de opciones
+        if (marca === "") {
+          errores.push("La marca es requerida.");
+        }
+
+        // c. El modelo debe ser requerido, texto alfanumérico y tener 25 caracteres o menos
+        var regexAlfanumerico = /^[a-zA-Z0-9\s]+$/; // Expresión regular para validar alfanumérico
+        if (modelo === "" || modelo.length > 25 || !regexAlfanumerico.test(modelo)) {
+          errores.push("El modelo es requerido, debe ser alfanumérico y tener 25 caracteres o menos.");
+        }
+
+        // d. El precio debe ser requerido y mayor a 99.99
+        if (precio === "" || isNaN(precio) || parseFloat(precio) <= 99.99) {
+          errores.push("El precio es requerido y debe ser mayor a 99.99.");
+        }
+
+        // e. Los detalles deben ser opcionales pero con un máximo de 250 caracteres
+        if (detalles.length > 250) {
+          errores.push("Los detalles deben tener 250 caracteres o menos.");
+        }
+
+        // f. Las unidades deben ser requeridas y el número registrado debe ser mayor o igual a 0
+        if (unidades === "" || isNaN(unidades) || parseInt(unidades) < 0) {
+          errores.push("Las unidades son requeridas y deben ser mayores o iguales a 0.");
+        }
+
+        // g. La ruta de la imagen debe ser opcional, pero si está vacía, se asigna una por defecto
+        if (imagen === "") {
+          document.getElementById('imagen').value = 'ruta/a/imagen/por/defecto.jpg'; // Puedes cambiar esta ruta según tus necesidades
+        }
+
+        // Mostrar errores o enviar el formulario si todo es correcto
+        if (errores.length > 0) {
+          alert("Errores en el formulario:\n" + errores.join("\n"));
+        } else {
+          // Si todo es correcto, se envía el formulario
+          document.getElementById('formularioProductos').submit();
+        }
+      }
+
+      // Asignar la función de validación al evento onsubmit del formulario
+      window.onload = function() {
+        document.getElementById('formularioProductos').onsubmit = validarFormulario;
+      };
+    </script>
+  </head>
+
+  <body>
+    <h1>Registro de productos &ldquo;Peluches Comercializables&rdquo;</h1>
+
+    <p>Inserte la Información del peluche</p>
+
+    <form id="formularioProductos" action="http://localhost/tecweb/practicas/p09/set_producto_v2.php" method="post" enctype="multipart/form-data">
+
+      <h2>Información del producto</h2>
+
+      <fieldset>
+        <legend>Información del peluche</legend>
+
+        <ul>
+          <li><label for="form-name">Nombre:</label> <input type="text" name="name" id="form-name"></li>
+          <li><label for="form-brand">Marca:</label> <input type="text" name="marca" id="form-brand"></li>
+          <li><label for="form-model">Modelo:</label> <input type="text" name="modelo" id="form-model"></li>
+          <li><label for="form-price">Precio:</label> <input type="number" name="precio" id="form-price"></li>
+          <li><label for="form-units">Unidades:</label> <input type="number" name="unidades" id="form-units"></li>
+          <li><label for="form-details">Mencione detalles generales y destacables del produto</label><br>
+            <textarea name="detalles" rows="4" cols="60" id="form-details" placeholder="No más de 250 caracteres de longitud"></textarea></li>
+          <li><label for="imagen">Imagen:</label> <input type="file" name="imagen" id="imagen" accept="image/*"></li>
+        </ul>
+      </fieldset>
+
+      <p>
+        <input type="submit" value="Guardar producto">
+        <input type="reset">
+      </p>
+
+    </form>
+  </body>
+
+</html>
