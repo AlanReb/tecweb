@@ -1,40 +1,46 @@
-
 <?php
-include_once __DIR__.'/database.php';
+// Obtener el JSON enviado desde el cliente
+$data = json_decode(file_get_contents("php://input"), true);
 
-// SE OBTIENE LA INFORMACIÓN DEL PRODUCTO ENVIADA POR EL CLIENTE
-$producto = file_get_contents('php://input');
+// Validar los datos recibidos
+if (isset($data['nombre']) && isset($data['marca']) && isset($data['modelo']) && isset($data['precio']) && isset($data['unidades']) && isset($data['detalles']) && isset($data['imagen'])) {
+    // Conectar a la base de datos (ajusta los parámetros según tu configuración)
+    $conn = new mysqli("localhost", "usuario", "contraseña", "basedatos");
 
-if (!empty($producto)) {
-    // SE TRANSFORMA EL STRING DEL JSON A OBJETO
-    $jsonOBJ = json_decode($producto);
-
-    // SE OBTIENEN LOS VALORES DEL OBJETO JSON
-    $nombre = utf8_decode($jsonOBJ->nombre);
-    $precio = $jsonOBJ->precio;
-    $unidades = $jsonOBJ->unidades;
-    $modelo = utf8_decode($jsonOBJ->modelo);
-    $marca = utf8_decode($jsonOBJ->marca);
-    $detalles = utf8_decode($jsonOBJ->detalles);
-    $imagen = $jsonOBJ->imagen;
-
-    // SE CREA LA CONSULTA SQL PARA INSERTAR EL NUEVO PRODUCTO
-    $sql = "INSERT INTO productos (nombre, precio, unidades, modelo, marca, detalles, imagen)
-            VALUES ('$nombre', '$precio', '$unidades', '$modelo', '$marca', '$detalles', '$imagen')";
-
-    // SE VERIFICA SI LA CONSULTA SE EJECUTA CORRECTAMENTE
-    if ($conexion->query($sql) === TRUE) {
-        // RESPUESTA DE ÉXITO
-        echo json_encode(["mensaje" => "Producto agregado exitosamente."]);
-    } else {
-        // RESPUESTA DE ERROR
-        echo json_encode(["error" => "Error al agregar el producto: " . $conexion->error]);
+    // Verificar la conexión
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
     }
 
-    // SE CIERRA LA CONEXIÓN
-    $conexion->close();
+    // Validar si el producto ya existe (comprobando el nombre y la columna 'eliminado')
+    $nombre = $conn->real_escape_string($data['nombre']);
+    $query = "SELECT * FROM productos WHERE nombre = '$nombre' AND eliminado = 0";
+    $result = $conn->query($query);
+
+    if ($result->num_rows > 0) {
+        echo "Error: El producto ya existe en la base de datos.";
+    } else {
+        // Preparar la consulta de inserción
+        $marca = $conn->real_escape_string($data['marca']);
+        $modelo = $conn->real_escape_string($data['modelo']);
+        $precio = $data['precio'];
+        $unidades = $data['unidades'];
+        $detalles = $conn->real_escape_string($data['detalles']);
+        $imagen = $conn->real_escape_string($data['imagen']);
+
+        $insertQuery = "INSERT INTO productos (nombre, marca, modelo, precio, unidades, detalles, imagen, eliminado) VALUES ('$nombre', '$marca', '$modelo', $precio, $unidades, '$detalles', '$imagen', 0)";
+
+        // Ejecutar la inserción
+        if ($conn->query($insertQuery) === TRUE) {
+            echo "Éxito: Producto agregado a la base de datos.";
+        } else {
+            echo "Error: " . $conn->error;
+        }
+    }
+
+    // Cerrar la conexión
+    $conn->close();
 } else {
-    // RESPUESTA DE ERROR SI NO HAY DATOS
-    echo json_encode(["error" => "No se recibieron datos."]);
+    echo "Error: Datos incompletos.";
 }
 ?>
