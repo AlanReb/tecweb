@@ -92,13 +92,8 @@ function buscarProducto(e) {
                     descripcion += '<li>marca: ' + producto.marca + '</li>';
                     descripcion += '<li>detalles: ' + producto.detalles + '</li>';
 
-                    template += `
-                        <tr>
-                            <td>${producto.id}</td>
-                            <td>${producto.nombre}</td>
-                            <td><ul>${descripcion}</ul></td>
-                        </tr>
-                    `;
+                    template += '<tr> <td>${producto.id}</td> <td>${producto.nombre}</td>  <td><ul>${descripcion}</ul></td>  </tr>';
+                    
                 });
 
                 // SE INSERTA LA PLANTILLA EN EL ELEMENTO CON ID "productos"
