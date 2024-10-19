@@ -20,14 +20,19 @@ $(function() {
                             descripcion += '<li>marca: '+product.marca+'</li>';
                             descripcion += '<li>detalles: '+product.detalles+'</li>';
                         template += `
-                            <tr>
+                            <tr productId = "${product.id}">
                                 <td>${product.id}</td>
                                 <td>${product.nombre}</td>
                                 <td>${descripcion}</td>
+                                <td>
+                                <button class="product-delete btn btn-danger">
+                                    Eliminar
+                                </button>
+                                </td>
                             </tr>
                         `
                     });
-                    $('#container').html(template);
+                    $('#products').html(template);
                 }
             })
         }
