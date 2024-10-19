@@ -35,7 +35,7 @@ $(function() {
 
 // * AGREGAR PRODUCTO (envío de formulario) *
    // Manejo del formulario para agregar producto
-   $('#product-form').submit(e => {
+   $('#product-form').submit(function (e) {
     e.preventDefault();
 
     // Obtenemos los datos del formulario
@@ -44,8 +44,8 @@ $(function() {
     let descriptionText = $('#description').val();
             
      // Validar si el nombre está presente
-    if (name === '') {
-        alert('El nombre del producto es requerido');
+    if (name === ''|| name.length > 100) {
+        alert('El nombre del producto es requerido y debe tener 100 caracteres o menos');
         return;
     }
 
@@ -95,8 +95,6 @@ $(function() {
         alert("Las unidades son requeridas y deben ser mayores o iguales a 0.");
         return;
     }
-
-
 
     const postData = {
         nombre: $('#name').val(),
@@ -155,10 +153,15 @@ $(function() {
                         descripcion += '<li>marca: '+product.marca+'</li>';
                         descripcion += '<li>detalles: '+product.detalles+'</li>';
                     template += `
-                        <tr>
+                        <tr productId = "${product.id}">
                             <td>${product.id}</td>
                             <td>${product.nombre}</td>
                             <td>${descripcion}</td>
+                            <td>
+                                <button class="product-delete btn btn-danger">
+                                    Eliminar
+                                </button>
+                            </td>
                         </tr>
                     `
                 });
@@ -167,7 +170,24 @@ $(function() {
         })
     }
     
-
+    // Eliminar un producto
+    $(document).on('click', '.product-delete', (e) => {
+        if(confirm('¿Estás seguro de que deseas eliminarlo?')) {
+            // Usar e.currentTarget para obtener el botón correcto
+            const element = e.currentTarget.closest('tr'); // Cambiar a closest('tr')
+            const id = $(element).attr('productId'); // Obtener el ID del producto
+            $.get('backend/product-delete.php', {id}, (response) => {
+                // Procesar la respuesta del servidor
+                const res = JSON.parse(response);
+                if (res.status === "success") {
+                    alert(res.message); // Mostrar mensaje de éxito
+                } else {
+                    alert(res.message); // Mostrar mensaje de error
+                }
+                listarProductos(); // Actualizar la lista de productos después de eliminar
+            });
+        }
+    });
 
 
 
