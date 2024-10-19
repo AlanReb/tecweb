@@ -143,6 +143,42 @@ function buscarProducto(e) {
     client.send();
 }
 
+// FUNCIÓN PARA VALIDAR LOS DATOS DEL PRODUCTO
+function validarProducto(producto) {
+    // Validar nombre
+    if (!producto.nombre || producto.nombre.length > 100) {
+        alert("El nombre es requerido y debe tener 100 caracteres o menos.");
+        return false;
+    }
+    // Validar marca
+    if (!producto.marca || producto.marca === "NA") { // Asegúrate de que "NA" es el valor por defecto
+        alert("La marca es requerida y debe seleccionarse de una lista de opciones.");
+        return false;
+    }
+    // Validar modelo
+    if (!producto.modelo || producto.modelo.length > 25) {
+        alert("El modelo es requerido y debe ser alfanumérico con 25 caracteres o menos.");
+        return false;
+    }
+    // Validar precio
+    if (!producto.precio || parseFloat(producto.precio) <= 99.99) {
+        alert("El precio es requerido y debe ser mayor a 99.99.");
+        return false;
+    }
+    // Validar detalles
+    if (producto.detalles && producto.detalles.length > 250) {
+        alert("Los detalles deben ser opcionales y, de usarse, deben tener 250 caracteres o menos.");
+        return false;
+    }
+    // Validar unidades
+    if (producto.unidades === undefined || producto.unidades < 0) {
+        alert("Las unidades son requeridas y deben ser mayores o iguales a 0.");
+        return false;
+    }
+    return true;
+}
+
+
 // FUNCIÓN CALLBACK DE BOTÓN "Agregar Producto"
 function agregarProducto(e) {
     e.preventDefault();
@@ -153,16 +189,12 @@ function agregarProducto(e) {
     var finalJSON = JSON.parse(productoJsonString);
     // SE AGREGA AL JSON EL NOMBRE DEL PRODUCTO
     finalJSON['nombre'] = document.getElementById('name').value;
+     // Validar el producto antes de enviarlo
+     if (!validarProducto(finalJSON)) {
+        return; // Si la validación falla, no envía el producto
+    }
     // SE OBTIENE EL STRING DEL JSON FINAL
     productoJsonString = JSON.stringify(finalJSON,null,2);
-
-/**
- * AQUÍ DEBES AGREGAR LAS VALIDACIONES DE LOS DATOS EN EL JSON
- * ...
- * 
- * --> EN CASO DE NO HABER ERRORES, SE ENVIAR EL PRODUCTO A AGREGAR
- */
-
     // SE CREA EL OBJETO DE CONEXIÓN ASÍNCRONA AL SERVIDOR
     var client = getXMLHttpRequest();
     client.open('POST', './backend/product-add.php', true);
@@ -191,6 +223,7 @@ function agregarProducto(e) {
     };
     client.send(productoJsonString);
 }
+
 
 // FUNCIÓN CALLBACK DE BOTÓN "Eliminar"
 function eliminarProducto() {
