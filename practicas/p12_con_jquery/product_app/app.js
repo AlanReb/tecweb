@@ -1,6 +1,7 @@
 
 $(function() {
     console.log('jQuery is Working');
+    listarProductos();
     $('#search').keyup( function(e) {
         if($('#search').val()){
             let search = $('#search').val();
@@ -38,14 +39,73 @@ $(function() {
     e.preventDefault();
 
     // Obtenemos los datos del formulario
+    // Obtener los datos del formulario
+    let name = $('#name').val();
+    let descriptionText = $('#description').val();
+            
+     // Validar si el nombre está presente
+    if (name === '') {
+        alert('El nombre del producto es requerido');
+        return;
+    }
+
+    // Intentar parsear la descripción a JSON
+    let description;
+    try {
+        description = JSON.parse(descriptionText);  // Convertir a JSON
+        console.log(description);
+    } catch (error) {
+        alert('La descripción debe estar en formato JSON válido.');
+        return;
+    }
+
+    // Validar que la estructura del JSON sea correcta según baseJSON
+    if (!description.hasOwnProperty('precio') || 
+        !description.hasOwnProperty('unidades') || 
+        !description.hasOwnProperty('modelo') || 
+        !description.hasOwnProperty('marca') || 
+        !description.hasOwnProperty('detalles') || 
+        !description.hasOwnProperty('imagen')) {
+        alert('La descripción JSON debe contener los campos correctos: precio, unidades, modelo, marca, detalles, imagen.');
+        return;
+    }
+
+    // Validar marca
+    if (!description.marca || description.marca === "NA") { // Asegúrate de que "NA" es el valor por defecto
+        alert("La marca es requerida y debe seleccionarse de una lista de opciones.");
+        return;
+    }
+    // Validar modelo
+    if (!description.modelo || description.modelo.length > 25) {
+        alert("El modelo es requerido y debe ser alfanumérico con 25 caracteres o menos.");
+        return;
+    }
+    // Validar precio
+    if (!description.precio || parseFloat(description.precio) <= 99.99) {
+        alert("El precio es requerido y debe ser mayor a 99.99.");
+        return;
+    }
+    // Validar detalles
+    if (description.detalles && description.detalles.length > 250) {
+        alert("Los detalles deben ser opcionales y, de usarse, deben tener 250 caracteres o menos.");
+        return;
+    }
+    // Validar unidades
+    if (description.unidades === undefined || description.unidades < 0) {
+        alert("Las unidades son requeridas y deben ser mayores o iguales a 0.");
+        return;
+    }
+
+
+
     const postData = {
         nombre: $('#name').val(),
-        marca: baseJSON.marca,
-        modelo: baseJSON.modelo,
-        precio: baseJSON.precio,
-        detalles: baseJSON.detalles,
-        unidades: baseJSON.unidades,
-        imagen: baseJSON.imagen
+        marca: description.marca,
+        modelo: description.modelo,
+        precio: description.precio,
+        detalles: description.detalles,
+        unidades: description.unidades,
+        imagen: description.imagen
     };
 
     // Convertimos los datos a JSON
@@ -71,7 +131,7 @@ $(function() {
                 }
 
                 $('#product-form').trigger('reset');
-                //listarProductos(); // Llama a la función para obtener la lista actualizada de productos
+                listarProductos(); // Llama a la función para obtener la lista actualizada de productos
             },
             error: function (xhr, status, error) {
                 console.error('Error al agregar el producto:', error);
@@ -79,30 +139,34 @@ $(function() {
         });
     });
 
-    $.ajax({
-        url: 'backend/product-list.php',
-        type: 'GET',
-        success: function (response){
-            let products = JSON.parse(response);
-            let template = '';
-            products.forEach(product => {
-                let descripcion = '';
-                    descripcion += '<li>precio: '+product.precio+'</li>';
-                    descripcion += '<li>unidades: '+product.unidades+'</li>';
-                    descripcion += '<li>modelo: '+product.modelo+'</li>';
-                    descripcion += '<li>marca: '+product.marca+'</li>';
-                    descripcion += '<li>detalles: '+product.detalles+'</li>';
-                template += `
-                    <tr>
-                        <td>${product.id}</td>
-                        <td>${product.nombre}</td>
-                        <td>${descripcion}</td>
-                    </tr>
-                `
-            });
-            $('#products').html(template);
-        }
-    })
+
+    function listarProductos() {
+        $.ajax({
+            url: 'backend/product-list.php',
+            type: 'GET',
+            success: function (response){
+                let products = JSON.parse(response);
+                let template = '';
+                products.forEach(product => {
+                    let descripcion = '';
+                        descripcion += '<li>precio: '+product.precio+'</li>';
+                        descripcion += '<li>unidades: '+product.unidades+'</li>';
+                        descripcion += '<li>modelo: '+product.modelo+'</li>';
+                        descripcion += '<li>marca: '+product.marca+'</li>';
+                        descripcion += '<li>detalles: '+product.detalles+'</li>';
+                    template += `
+                        <tr>
+                            <td>${product.id}</td>
+                            <td>${product.nombre}</td>
+                            <td>${descripcion}</td>
+                        </tr>
+                    `
+                });
+                $('#products').html(template);
+            }
+        })
+    }
+    
 
 
 
