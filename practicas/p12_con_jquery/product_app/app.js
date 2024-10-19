@@ -1,5 +1,7 @@
 
 $(function() {
+
+    let edit = false;
     console.log('jQuery is Working');
     listarProductos();
     $('#search').keyup( function(e) {
@@ -58,7 +60,7 @@ $(function() {
     let description;
     try {
         description = JSON.parse(descriptionText);  // Convertir a JSON
-        console.log(description);
+        
     } catch (error) {
         alert('La descripción debe estar en formato JSON válido.');
         return;
@@ -108,15 +110,17 @@ $(function() {
         precio: description.precio,
         detalles: description.detalles,
         unidades: description.unidades,
-        imagen: description.imagen
+        imagen: description.imagen,
+        id: $('#product-id').val()
     };
-
+    console.log(postData);
     // Convertimos los datos a JSON
     const jsonData = JSON.stringify(postData);
-
+    let url = edit == false ? 'backend/product-add.php' : 'backend/product-edit.php';
+    
         // Enviamos los datos al servidor
         $.ajax({
-            url: 'backend/product-add.php', // Definir correctamente la URL
+            url: url, // Definir correctamente la URL
             type: 'POST',
             data: jsonData,
             contentType: 'application/json', // Muy importante para que PHP lo reciba correctamente
@@ -137,7 +141,7 @@ $(function() {
                 listarProductos(); // Llama a la función para obtener la lista actualizada de productos
             },
             error: function (xhr, status, error) {
-                console.error('Error al agregar el producto:', error);
+                console.error('Error al agregar o editar el producto:', error);
             }
         });
     });
@@ -160,7 +164,9 @@ $(function() {
                     template += `
                         <tr productId = "${product.id}">
                             <td>${product.id}</td>
-                            <td>${product.nombre}</td>
+                            <td>
+                                <a href"#" class="product-item"> ${product.nombre} </a>
+                            </td>
                             <td>${descripcion}</td>
                             <td>
                                 <button class="product-delete btn btn-danger">
@@ -194,7 +200,42 @@ $(function() {
         }
     });
 
-
+    $(document).on('click', '.product-item', function() { 
+        let element = $(this)[0].parentElement.parentElement;
+        let id = $(element).attr('productId');
+        
+        // Hacemos la petición GET para obtener el producto por su ID
+        $.get('backend/product-single.php', {id}, function(response) {   
+            const product = JSON.parse(response);
+    
+            // Verificamos si el estado de la respuesta es "success"
+            if (product.status === 'success') {
+                console.log(product);
+    
+                // Rellenar el campo del nombre con el nombre del producto
+                $('#name').val(product.producto.nombre);
+    
+                // Convertir los detalles del producto a JSON y mostrarlos en el campo #description
+                const description = {
+                    precio: product.producto.precio,
+                    unidades: product.producto.unidades,
+                    modelo: product.producto.modelo,
+                    marca: product.producto.marca,
+                    detalles: product.producto.detalles,
+                    imagen: product.producto.imagen
+                };
+    
+                // Rellenar el campo de descripción en formato JSON
+                $('#description').val(JSON.stringify(description, null, 2));  // Formateado para que sea más legible
+                $('#product-id').val(product.producto.id);
+                
+                edit = true;
+            } else {
+                alert(product.message);  // En caso de error, muestra el mensaje
+            }
+        });
+    });
+        
 
 });
 
