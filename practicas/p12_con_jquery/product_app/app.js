@@ -3,6 +3,7 @@ $(function() {
 
     let edit = false;
     console.log('jQuery is Working');
+    $('#product-result').hide();
     listarProductos();
     $('#search').keyup( function(e) {
         if($('#search').val()){
@@ -128,9 +129,11 @@ $(function() {
                 try {
                     const res = JSON.parse(response);
                     if (res.status === "success") {
-                        alert(res.message); // Producto agregado correctamente
+                        $('#container').html(res.message); // Producto agregado correctamente
+                        $('#product-result').show();
                     } else {
-                        alert(res.message); // Mensaje de error
+                        $('#container').html(res.message); // Mensaje de error
+                        $('#product-result').show();
                     }
                 } catch (error) {
                     console.error("Error al procesar el JSON:", error);
@@ -191,9 +194,11 @@ $(function() {
                 // Procesar la respuesta del servidor
                 const res = JSON.parse(response);
                 if (res.status === "success") {
-                    alert(res.message); // Mostrar mensaje de éxito
+                    $('#container').html(res.message); // Mostrar mensaje de éxito
+                    $('#product-result').show();
                 } else {
-                    alert(res.message); // Mostrar mensaje de error
+                    $('#container').html(res.message); // Mostrar mensaje de error
+                    $('#product-result').show();
                 }
                 listarProductos(); // Actualizar la lista de productos después de eliminar
             });
@@ -231,7 +236,8 @@ $(function() {
                 
                 edit = true;
             } else {
-                alert(product.message);  // En caso de error, muestra el mensaje
+                $('#container').html(product.message);  // En caso de error, muestra el mensaje
+                $('#product-result').show();
             }
         });
     });
