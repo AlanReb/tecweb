@@ -7,11 +7,17 @@
 </head>
 <body>
     <?php
-    use EJEMPLOS\POO\Cabecera2 as Cabecera;
+    use EJEMPLOS\POO\Cabecera as Cabecera;
     require_once __DIR__.'/Cabecera.php';
 
-    $cab = new Cabecera('El rincon del programador', 'center','https://cs.buap.mx/');
+    $cab = new Cabecera('El rincon del programador', 'center');
     $cab->graficar();
+
+    /*use EJEMPLOS\POO\Cabecera2 as Cabecera;
+    require_once __DIR__.'/Cabecera.php';
+
+    $cab = new Cabecera('El rincon del programador', 'center','https://www.cs.buap.mx/');
+    $cab->graficar(); */
 
     ?>
 </body>
