@@ -1,5 +1,6 @@
 <?php
-include_once __DIR__.'/database.php';
+use TECWEB\MYAPI\Products as Products;
+include_once __DIR__.'/myapi/database.php';
 
 $response = ['exists' => false];
 if (isset($_GET['name'])) {

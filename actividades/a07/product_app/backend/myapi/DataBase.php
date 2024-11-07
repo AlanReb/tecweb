@@ -1,4 +1,6 @@
 <?php
+namespace TECWEB\MYAPI;
+
 abstract class DataBase {
     protected $conexion = NULL;
     
