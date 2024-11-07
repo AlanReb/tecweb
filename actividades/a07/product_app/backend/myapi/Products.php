@@ -1,5 +1,6 @@
 <?php
-class Products extends responseBase{
+require_once 'DataBase.php';
+class Products extends DataBase{
     private $response = [];
     
     public function __construct($user = 'root', $pass = 'nomeacuerdo', $db = 'marketzone') {
@@ -7,7 +8,7 @@ class Products extends responseBase{
     }
 
     public function add($producto){
-        $response = array(
+        $this->response = array(
             'status'  => 'error',
             'message' => 'Ya existe un producto con ese nombre'
         );
@@ -23,10 +24,10 @@ class Products extends responseBase{
                 $this->conexion->set_charset("utf8");
                 $sql = "INSERT INTO productos VALUES (null, '{$jsonOBJ->nombre}', '{$jsonOBJ->marca}', '{$jsonOBJ->modelo}', {$jsonOBJ->precio}, '{$jsonOBJ->detalles}', {$jsonOBJ->unidades}, '{$jsonOBJ->imagen}', 0)";
                 if($this->conexion->query($sql)){
-                    $response['status'] =  "success";
-                    $response['message'] =  "Producto agregado";
+                    $this->response['status'] =  "success";
+                    $this->response['message'] =  "Producto agregado";
                 } else {
-                    $response['message'] = "ERROR: No se ejecuto $sql. " . mysqli_error($this->conexion);
+                    $this->response['message'] = "ERROR: No se ejecuto $sql. " . mysqli_error($this->conexion);
                 }
             }
     
@@ -37,7 +38,7 @@ class Products extends responseBase{
     }
 
     public function delete($string = _GET['id']){
-        $response = array(
+        $this->response = array(
             'status'  => 'error',
             'message' => 'La consulta falló'
         );
@@ -47,17 +48,18 @@ class Products extends responseBase{
             // SE REALIZA LA QUERY DE BÚSQUEDA Y AL MISMO TIEMPO SE VALIDA SI HUBO RESULTADOS
             $sql = "UPDATE productos SET eliminado=1 WHERE id = {$id}";
             if ( $this->conexion->query($sql) ) {
-                $response['status'] =  "success";
-                $response['message'] =  "Producto eliminado";
+                $this->response['status'] =  "success";
+                $this->response['message'] =  "Producto eliminado";
             } else {
-                $response['message'] = "ERROR: No se ejecuto $sql. " . mysqli_error($this->conexion);
+                $this->response['message'] = "ERROR: No se ejecuto $sql. " . mysqli_error($this->conexion);
             }
             $this->conexion->close();
         } 
+
     }
 
     public function edit($producto){
-        $response = array(
+        $this->response = array(
             'status'  => 'error',
             'message' => 'Error en la actualización del producto'
         );
@@ -77,26 +79,26 @@ class Products extends responseBase{
     
                 // Ejecutamos la consulta
                 if ($this->conexion->query($sql)) {
-                    $response['status'] = "success";
-                    $response['message'] = "Producto actualizado correctamente";
+                    $this->response['status'] = "success";
+                    $this->response['message'] = "Producto actualizado correctamente";
                 } else {
                     // Mensaje en caso de error al ejecutar la consulta
-                    $response['message'] = "ERROR: No se ejecutó $sql. " . mysqli_error($this->conexion);
+                    $this->response['message'] = "ERROR: No se ejecutó $sql. " . mysqli_error($this->conexion);
                 }
             } else {
-                $response['message'] = 'Datos incompletos para la actualización';
+                $this->response['message'] = 'Datos incompletos para la actualización';
             }
     
             // Cierra la conexión
             $this->conexion->close();
         } else {
-            $response['message'] = 'No se recibió información para actualizar';
+            $this->response['message'] = 'No se recibió información para actualizar';
         }
     
     }
 
     public function list(){
-        $response = array();
+        $this->response = array();
 
         // SE REALIZA LA QUERY DE BÚSQUEDA Y AL MISMO TIEMPO SE VALIDA SI HUBO RESULTADOS
         if ( $result = $this->conexion->query("SELECT * FROM productos WHERE eliminado = 0") ) {
@@ -107,7 +109,7 @@ class Products extends responseBase{
                 // SE CODIFICAN A UTF-8 LOS DATOS Y SE MAPEAN AL ARREGLO DE RESPUESTA
                 foreach($rows as $num => $row) {
                     foreach($row as $key => $value) {
-                        $response[$num][$key] = utf8_encode($value);
+                        $this->response[$num][$key] = utf8_encode($value);
                     }
                 }
             }
@@ -116,11 +118,12 @@ class Products extends responseBase{
             die('Query Error: '.mysqli_error($this->conexion));
         }
         $this->conexion->close();
+
     }
 
     public function search($string = _GET['search']){
         // SE CREA EL ARREGLO QUE SE VA A DEVOLVER EN FORMA DE JSON
-        $response = array();
+        $this->response = array();
         // SE VERIFICA HABER RECIBIDO EL ID
         if( isset($string) ) {
             $search = $string;
@@ -134,7 +137,7 @@ class Products extends responseBase{
                     // SE CODIFICAN A UTF-8 LOS DATOS Y SE MAPEAN AL ARREGLO DE RESPUESTA
                     foreach($rows as $num => $row) {
                         foreach($row as $key => $value) {
-                            $response[$num][$key] = utf8_encode($value);
+                            $this->response[$num][$key] = utf8_encode($value);
                         }
                     }
                 }
@@ -148,7 +151,7 @@ class Products extends responseBase{
 
     public function single($string = _GET['id']){
         // Inicializamos el arreglo para almacenar los datos
-        $response = array(
+        $this->response = array(
             'status'  => 'error',
             'message' => 'No se encontró el producto'
         );
@@ -166,28 +169,28 @@ class Products extends responseBase{
 
                     // Convertimos los valores a UTF-8 y guardamos el producto en el array
                     foreach($producto as $key => $value) {
-                        $response['producto'][$key] = utf8_encode($value);
+                        $this->response['producto'][$key] = utf8_encode($value);
                     }
-                    $response['status'] = 'success';
-                    $response['message'] = 'Producto encontrado';
+                    $this->response['status'] = 'success';
+                    $this->response['message'] = 'Producto encontrado';
                 } else {
-                    $response['message'] = 'Producto no encontrado o eliminado';
+                    $this->response['message'] = 'Producto no encontrado o eliminado';
                 }
                 $result->free();
             } else {
-                $response['message'] = "Error en la consulta: " . mysqli_error($this->conexion);
+                $this->response['message'] = "Error en la consulta: " . mysqli_error($this->conexion);
             }
 
             // Cerramos la conexión a la base de datos
             $this->conexion->close();
         } else {
-            $response['message'] = 'No se proporcionó un ID';
+            $this->response['message'] = 'No se proporcionó un ID';
         }
     }
 
     public function singleByName($string= _GET['name']){
         // Inicializamos el arreglo para almacenar los datos
-        $response = array(
+        $this->response = array(
             'status'  => 'error',
             'message' => 'No se encontró el producto'
         );
@@ -203,22 +206,22 @@ class Products extends responseBase{
 
                     // Convertimos los valores a UTF-8 y guardamos el producto en el array
                     foreach($producto as $key => $value) {
-                        $response['producto'][$key] = utf8_encode($value);
+                        $this->response['producto'][$key] = utf8_encode($value);
                     }
-                    $response['status'] = 'success';
-                    $response['message'] = 'Producto encontrado';
+                    $this->response['status'] = 'success';
+                    $this->response['message'] = 'Producto encontrado';
                 } else {
-                    $response['message'] = 'Producto no encontrado o eliminado';
+                    $this->response['message'] = 'Producto no encontrado o eliminado';
                 }
                 $result->free();
             } else {
-                $response['message'] = "Error en la consulta: " . mysqli_error($this->conexion);
+                $this->response['message'] = "Error en la consulta: " . mysqli_error($this->conexion);
             }
 
             // Cerramos la conexión a la base de datos
             $this->conexion->close();
         } else {
-            $response['message'] = 'No se proporcionó un ID';
+            $this->response['message'] = 'No se proporcionó un ID';
         }
     }
 

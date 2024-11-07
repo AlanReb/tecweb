@@ -1,6 +1,6 @@
 <?php
     include_once __DIR__.'/myapi/Products.php';
-    $p = New Producto();
+    $p = New Products();
     $p->edit(file_get_contents('php://input'));
-    $p->getData();
+    echo $p->getData();
 ?>
