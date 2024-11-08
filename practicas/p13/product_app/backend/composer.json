@@ -1,5 +1,5 @@
 {
     "autoload": {
-        "psr-4": {"TECWEB\\MYAPI\\": "myapi/"}
+        "psr-4": {"TECWEB\\MYAPI\\": "backend/myapi/"}
     }
 }

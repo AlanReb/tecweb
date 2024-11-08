@@ -2,9 +2,9 @@
     namespace TECWEB\MYAPI;
 
     use TECWEB\MYAPI\DataBase;
-    require_once __DIR__.'/DataBase.php';
+    require_once __DIR__.'/../DataBase.php';
 
-    class Products extends DataBase{
+    class Read extends DataBase{
         
         public function __construct($db) {
             parent::__construct($db);
