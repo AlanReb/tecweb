@@ -1,7 +1,7 @@
 <?php
-    use TECWEB\MYAPI\Products as Products;
+    use TECWEB\MYAPI\DELETE\Delete;
     include_once __DIR__.'/myapi/database.php';
-    $p = New Products('root', 'nomeacuerdo', 'marketzone');
+    $p = New Delete('marketzone');
     $p->delete($_GET['id']);
     echo $p->getData();
 ?>
