@@ -2,7 +2,7 @@
     namespace TECWEB\MYAPI\UPDATE;
 
     use TECWEB\MYAPI\DataBase;
-    require_once __DIR__.'/DataBase.php';
+    require_once __DIR__.'/../DataBase.php';
 
     class Update extends DataBase{
 
