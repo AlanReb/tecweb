@@ -2,7 +2,7 @@
     namespace TECWEB\MYAPI\DELETE;
 
     use TECWEB\MYAPI\DataBase;
-    require_once __DIR__.'/DataBase.php';
+    require_once __DIR__.'/../DataBase.php';
 
     class Delete extends DataBase{
 
@@ -10,7 +10,7 @@
             parent::__construct($db);
         }
 
-        public function delete($string = _GET['id']){
+        public function delete_dat($string){
             $this->response = array(
                 'status'  => 'error',
                 'message' => 'La consulta falló'
