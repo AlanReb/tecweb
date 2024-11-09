@@ -1,7 +1,8 @@
 <?php
-    use TECWEB\MYAPI\Products as Products;
-    include_once __DIR__.'/myapi/database.php';
-    $p = New Products();
-    $p->search($_GET['search']);
-    $p->getData();
+    use TECWEB\MYAPI\READ\Read;
+    include_once __DIR__ . '/vendor/autoload.php';
+    
+    $R = New Read('marketzone');
+    $R->search($_GET['search']);
+    $R->getData();
 ?>
