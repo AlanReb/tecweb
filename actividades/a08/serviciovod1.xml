@@ -35,6 +35,10 @@
                     <nombre>El resplandor</nombre>
                     <duracion>3 horas</duracion>
                 </titulo>
+                <titulo>
+                    <nombre>La monja</nombre>
+                    <duracion>1 hora 30</duracion>
+                </titulo>
             </genero>
             <genero>
                 <nombre> Accion </nombre>
@@ -48,6 +52,10 @@
                 </titulo>
                 <titulo>
                     <nombre>Rambo</nombre>
+                    <duracion>2 horas</duracion>
+                </titulo>
+                <titulo>
+                    <nombre>Terminator 2</nombre>
                     <duracion>2 horas</duracion>
                 </titulo>
             </genero>           
@@ -67,6 +75,14 @@
                     <nombre>Young sheldon</nombre>
                     <duracion>7 temporadas</duracion>
                 </titulo>
+                <titulo>
+                    <nombre>Two and a half men</nombre>
+                    <duracion>7 temporadas</duracion>
+                </titulo>
+                <titulo>
+                    <nombre>The office</nombre>
+                    <duracion>7 temporadas</duracion>
+                </titulo>
             </genero>
             <genero>
                 <nombre> Misterio </nombre>
@@ -76,6 +92,14 @@
                 </titulo>
                 <titulo>
                     <nombre>Dracula</nombre>
+                    <duracion>1 temporada</duracion>
+                </titulo>
+                <titulo>
+                    <nombre>El problema de los 3 cuerpos</nombre>
+                    <duracion>2 temporadas</duracion>
+                </titulo>
+                <titulo>
+                    <nombre>Misa de medianoche</nombre>
                     <duracion>1 temporada</duracion>
                 </titulo>
             </genero>
