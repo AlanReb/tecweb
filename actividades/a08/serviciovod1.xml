@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<CatalogoVOD>
+    <cuenta>
+        <correo>alanreb@gmail.com</correo>
+        <perfiles>
+            <perfil>
+                <usuario>Armando</usuario>
+                <idioma>Español</idioma>
+            </perfil>
+            <perfil>
+                <usuario>Juancho</usuario>
+                <idioma>Español</idioma>
+            </perfil>
+            <perfil>
+                <usuario>John</usuario>
+                <idioma>Ingles</idioma>
+            </perfil>
+        </perfiles>
+    </cuenta>
+    
+    <contenido>
+        <peliculas>
+            <genero>
+                <nombre> Terror </nombre>
+                <titulo>
+                    <nombre>El conjuro</nombre>
+                    <duracion>2 horas</duracion>
+                </titulo>
+                <titulo>
+                    <nombre>El conjuro 2</nombre>
+                    <duracion>2 horas 30</duracion>
+                </titulo>
+                <titulo>
+                    <nombre>El resplandor</nombre>
+                    <duracion>3 horas</duracion>
+                </titulo>
+            </genero>
+            <genero>
+                <nombre> Accion </nombre>
+                <titulo>
+                    <nombre>Avengers</nombre>
+                    <duracion>1 hora 30</duracion>
+                </titulo>
+                <titulo>
+                    <nombre>Los indestructibles 3</nombre>
+                    <duracion>2 horas 30</duracion>
+                </titulo>
+                <titulo>
+                    <nombre>Rambo</nombre>
+                    <duracion>2 horas</duracion>
+                </titulo>
+            </genero>           
+            
+            
+            
+        </peliculas>
+        
+        <programas>
+            <genero>
+                <nombre> Comedia </nombre>
+                <titulo>
+                    <nombre>The big bang theory</nombre>
+                    <duracion>12 temporadas</duracion>
+                </titulo>
+                <titulo>
+                    <nombre>Young sheldon</nombre>
+                    <duracion>7 temporadas</duracion>
+                </titulo>
+            </genero>
+            <genero>
+                <nombre> Misterio </nombre>
+                <titulo>
+                    <nombre>La caida de la casa Usher</nombre>
+                    <duracion>1 temporada</duracion>
+                </titulo>
+                <titulo>
+                    <nombre>Dracula</nombre>
+                    <duracion>1 temporada</duracion>
+                </titulo>
+            </genero>
+            
+        </programas>
+    </contenido>
+    
+</CatalogoVOD>
