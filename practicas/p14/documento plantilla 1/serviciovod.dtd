@@ -5,19 +5,24 @@
 <!ELEMENT peliculas (genero+)>
 <!ELEMENT programas (genero+)>
 <!ELEMENT genero (titulo+)>
-<!ELEMENT perfil (usuario,idioma)>
-<!ELEMENT titulo (nombre,duracion)>
-<!ELEMENT nombre (#PCDATA)>
-<!ELEMENT Nombre (#PCDATA)>
-<!ELEMENT usuario (#PCDATA)>
-<!ELEMENT idioma (#PCDATA)>
-<!ELEMENT duracion (#PCDATA)>
+
+<!ELEMENT perfil (#PCDATA)>
+<!ELEMENT titulo (#PCDATA)>
 
 <!ATTLIST genero
 Nombre CDATA #REQUIRED
 >
 
-
 <!ATTLIST cuenta
 correo CDATA #REQUIRED
+>
+
+<!ATTLIST perfil
+usuario CDATA #REQUIRED
+idioma CDATA #REQUIRED
+>
+
+<!ATTLIST titulo
+nombre CDATA #REQUIRED
+duracion CDATA #REQUIRED
 >
