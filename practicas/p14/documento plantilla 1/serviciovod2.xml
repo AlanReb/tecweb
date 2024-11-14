@@ -12,7 +12,7 @@
     <contenido>
         <peliculas>
             <genero Nombre="Terror">
-                <titulo nombre="El conjuro" duracion="2 horas"/>
+                <titulo nombre="El conjuro" duracion="2 horas"><![CDATA[&<video id="11">&lt;</video> ]]> </titulo>
                 <titulo nombre="El conjuro 2" duracion="2 horas 30"/>
                 <titulo nombre="El resplandor" duracion="3 horas"/>
                 <titulo nombre="La monja" duracion="1 hora 30"/>
@@ -27,7 +27,7 @@
         
         <programas>
             <genero Nombre="Comedia">
-                <titulo nombre="The big bang theory" duracion="12 temporadas"/>
+                <titulo nombre="The big bang theory" duracion="12 temporadas">&lt;video id="11"&gt;&amp;lt;&lt;/video&gt;</titulo>
                 <titulo nombre="Young sheldon" duracion="7 temporadas"/>
                 <titulo nombre="Two and a half men" duracion="7 temporadas"/>
                 <titulo nombre="The office" duracion="7 temporadas"/>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+    
+    <!-- Elemento raíz -->
+    <xsd:element name="Spotify">
+        <xsd:complexType>
+            <xsd:sequence>
+                <!-- Elemento Cuenta, debe aparecer al menos una vez -->
+                <xsd:element name="Cuenta" minOccurs="1" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <!-- Elemento Nombre (cadena) -->
+                            <xsd:element name="Nombre" type="xsd:string"/>
+                            <!-- Elemento Correo (cadena) -->
+                            <xsd:element name="Correo" type="xsd:string"/>
+                            <!-- Elemento Telefono (opcional) -->
+                            <xsd:element name="Telefono" minOccurs="0">
+                                <xsd:complexType>
+                                    <xsd:simpleContent>
+                                        <xsd:extension base="xsd:string">
+                                            <!-- Atributo requerido tipo en Telefono -->
+                                            <xsd:attribute name="tipo" type="xsd:string" use="required"/>
+                                        </xsd:extension>
+                                    </xsd:simpleContent>
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:sequence>
+                        <!-- Atributos para Cuenta -->
+                        <xsd:attribute name="id" type="xsd:integer" use="required"/>
+                        <xsd:attribute name="plan" type="xsd:string" use="required"/>
+                        <xsd:attribute name="fechaIni" type="xsd:date" use="optional"/>
+                        <xsd:attribute name="fechaFin" type="xsd:date" use="optional"/>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+            <!-- Atributo de versión para Spotify -->
+            <xsd:attribute name="version" type="xsd:string" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+    
+</xsd:schema>
