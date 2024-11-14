@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<CatalogoVOD>
+    <cuenta correo="alanreb@gmail">
+        <perfiles>
+            <perfil usuario="Armando" idioma="Español"/>
+            <perfil usuario='Juancho' idioma='Español'/>
+            <perfil usuario="John" idioma='Inglés'/>
+        </perfiles>
+    </cuenta>
+    
+    <contenido>
+        <peliculas>
+            <genero Nombre="Terror">
+                <titulo nombre="El conjuro" duracion="2 horas"/>
+                <titulo nombre="El conjuro 2" duracion="2 horas 30"/>
+                <titulo nombre="El resplandor" duracion="3 horas"/>
+                <titulo nombre="La monja" duracion="1 hora 30"/>
+            </genero>
+            <genero Nombre="Accion">
+                <titulo nombre="Avengers" duracion="1 hora 30"/>
+                <titulo nombre="Los indestructibles 3" duracion="2 horas 30"/>
+                <titulo nombre="Rambo" duracion="2 horas"/>
+                <titulo nombre="Terminator 2" duracion="2 horas"/>
+            </genero>  
+        </peliculas>
+        
+        <programas>
+            <genero Nombre="Comedia">
+                <titulo nombre="The big bang theory" duracion="12 temporadas"/>
+                <titulo nombre="Young sheldon" duracion="7 temporadas"/>
+                <titulo nombre="Two and a half men" duracion="7 temporadas"/>
+                <titulo nombre="The office" duracion="7 temporadas"/>
+            </genero>
+            <genero Nombre="Misterio">
+                <titulo nombre="La caida de la casa Usher" duracion="1 temporada"/>
+                <titulo nombre="Dracula" duracion="1 temporada"/>
+                <titulo nombre="El problema de los 3 cuerpos" duracion="2 temporadas"/>
+                <titulo nombre="Misa de medianoche" duracion="1 temporada"/>
+            </genero> 
+        </programas>
+    </contenido>
+    
+</CatalogoVOD>
