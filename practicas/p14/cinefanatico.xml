@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE cinefanatico SYSTEM "cinefanatico.dtd">
+<cinefanatico>
+    <tarjeta noserie="1234567" visitas="3" puntos="11">
+        <nombre>Alan</nombre>
+        <correo>alanrebgradas@gmail.com</correo>
+        <telefono tipo="movil">2448581</telefono>
+    </tarjeta>
+</cinefanatico>
