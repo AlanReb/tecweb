@@ -1,88 +1,97 @@
 <?php
 
-use tecweb\MyApi\READ\Read; 
-use tecweb\MyApi\UPDATE\Update;
-use tecweb\MyApi\DELETE\Delete; 
-use tecweb\MyApi\CREATE\Create;
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Factory\AppFactory;
 
-require '../vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 
-$app = new Slim\App();
+// Crear la aplicación Slim
+$app = AppFactory::create();
 
-// Ruta principal
-$app->get('/', function ($request, $response, $args) {
-    return $response->withJson(["message" => "Bienvenido al API RESTful"], 200);
+// Establecer la base URL de la aplicación si es necesario
+
+$app->setBasePath('/tecweb/practicas/p15/p13/product_app/backend');
+
+
+
+$app->get('/test', function ($request, $response, $args) {
+    $response->getBody()->write('Test funcionando!');
+    return $response;
 });
 
-// Obtener un producto por nombre
-$app->get('/product/name/{name}', function ($request, $response, $args) {
-    $products = new Read('marketzone');
-    $products->singleByName($args['name']);
-    return $response->withJson($products->getData());
+
+
+// Definir las rutas de los servicios RESTful
+
+// Ruta principal para comprobar que el API funciona
+$app->get('/', function (Request $request, Response $response, $args) {
+    $data = ['message' => 'Bienvenido al API RESTful'];
+    $response->getBody()->write(json_encode($data));
+    return $response->withHeader('Content-Type', 'application/json');
 });
 
-// Obtener un producto por ID
-$app->get('/product/{id}', function ($request, $response, $args) {
-    $products = new Read('marketzone');
-    $products->single($args['id']);
-    return $response->withJson($products->getData());
-});
-
-// Verificar si un nombre de producto existe
-$app->get('/product/exists/{name}', function ($request, $response, $args) {
-    include_once __DIR__.'/../myapi/database.php';
-    $name = mysqli_real_escape_string($conn, $args['name']);
-    $id = $request->getQueryParam('id', null);
-    if ($id) {
-        $query = "SELECT COUNT(*) as count FROM productos WHERE nombre='$name' AND id != '$id'";
-    } else {
-        $query = "SELECT COUNT(*) as count FROM productos WHERE nombre='$name'";
-    }
-    $result = mysqli_query($conn, $query);
-    $data = mysqli_fetch_assoc($result);
-    return $response->withJson(['exists' => $data['count'] > 0]);
-});
-
-// Buscar productos
-$app->get('/products/search', function ($request, $response, $args) {
-    $products = new Read('marketzone');
-    $search = $request->getQueryParam('search', '');
-    $products->search($search);
-    return $response->withJson($products->getData());
-});
-
-// Listar productos
-$app->get('/products', function ($request, $response, $args) {
-    $products = new Read('marketzone');
+// Obtener todos los productos
+$app->get('/products', function (Request $request, Response $response, $args) {
+    $products = new \tecweb\MyApi\READ\Read('marketzone');
     $products->list();
-    return $response->withJson($products->getData());
+    $response->getBody()->write(json_encode($products->getData()));
+    return $response->withHeader('Content-Type', 'application/json');
 });
 
-// Actualizar un producto
-$app->put('/product', function ($request, $response, $args) {
-    $products = new Update('marketzone');
-    $products->edit($request->getBody());
-    return $response->withJson($products->getData());
+// Buscar productos por nombre, descripción o ID
+$app->get('/products/search', function (Request $request, Response $response, $args) {
+    $search = $request->getQueryParams()['search'] ?? '';
+    $products = new \tecweb\MyApi\READ\Read('marketzone');
+    $products->search($search);
+    $response->getBody()->write(json_encode($products->getData()));
+    return $response->withHeader('Content-Type', 'application/json');
 });
 
-// Eliminar un producto
-$app->delete('/product', function ($request, $response, $args) {
-    $p = new Delete('marketzone');
-    $id = $request->getParsedBody()['id'];
-    if ($id) {
-        $p->delete($id);
-        return $response->withJson($p->getData());
-    } else {
-        return $response->withJson(['status' => 'error', 'message' => 'ID no proporcionado'], 400);
-    }
+// Obtener producto por ID
+$app->get('/product/{id}', function (Request $request, Response $response, $args) {
+    $id = $args['id'];
+    $product = new \tecweb\MyApi\READ\Read('marketzone');
+    $product->single($id);
+    $response->getBody()->write(json_encode($product->getData()));
+    return $response->withHeader('Content-Type', 'application/json');
 });
 
-// Crear un nuevo producto
-$app->post('/product', function ($request, $response, $args) {
-    $products = new Create('marketzone');
-    $products->add($request->getBody());
-    return $response->withJson($products->getData());
+// Agregar un nuevo producto
+$app->post('/product', function (Request $request, Response $response, $args) {
+    $body = $request->getParsedBody();
+    $product = new \tecweb\MyApi\CREATE\Create('marketzone');
+    $product->add(json_encode($body));
+    $response->getBody()->write(json_encode($product->getData()));
+    return $response->withHeader('Content-Type', 'application/json');
 });
 
+// Actualizar producto existente
+$app->put('/product/{id}', function (Request $request, Response $response, $args) {
+    $id = $args['id'];
+    $body = $request->getParsedBody();
+    $body['id'] = $id;
+    $product = new \tecweb\MyApi\UPDATE\Update('marketzone');
+    $product->edit(json_encode($body));
+    $response->getBody()->write(json_encode($product->getData()));
+    return $response->withHeader('Content-Type', 'application/json');
+});
+
+// Eliminar producto por ID
+$app->delete('/product/{id}', function (Request $request, Response $response, $args) {
+    $id = $args['id'];
+    $product = new \tecweb\MyApi\DELETE\Delete('marketzone');
+    $product->delete($id);
+    $response->getBody()->write(json_encode($product->getData()));
+    return $response->withHeader('Content-Type', 'application/json');
+});
+
+
+// Manejar errores y excepciones globales
+$app->addRoutingMiddleware();
+$errorMiddleware = $app->addErrorMiddleware(true, true, true);
+
+// Iniciar la aplicación Slim
 $app->run();
+
 ?>
